@@ -48,8 +48,8 @@ public class Note {
         return content.substring(0, 30) + "...";
     }
 
-    public String isValid() {
-        return title != null && title.isEmpty() && content != null;
+    public boolean isValid() {
+        return title != null && !title.isEmpty() && content != null && !content.isEmpty();
     }
 
     @Override

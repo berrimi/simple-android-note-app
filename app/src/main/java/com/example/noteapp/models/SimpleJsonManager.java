@@ -3,7 +3,6 @@ package com.example.noteapp.models;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.noteapp.models.Note;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -12,13 +11,13 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleJsonManger {
+public class SimpleJsonManager {
 
     private static final String FILE_NAME = "notes.json";
     private Context context;
     private Gson gson;
 
-    public SimpleJsonManger(Context context) {
+    public SimpleJsonManager(Context context) {
         this.context = context;
         this.gson = new Gson();
     }
@@ -38,7 +37,7 @@ public class SimpleJsonManger {
 
     public List<Note> loadNotes() {
         List<Note> notes = new ArrayList<>();
-        try (FileInputStream fis = context.openFileOutput(FILE_NAME);
+        try (FileInputStream fis = context.openFileInput(FILE_NAME);
                 InputStreamReader isr = new InputStreamReader(fis);
                 BufferedReader reader = new BufferedReader(isr)) {
             StringBuilder sb = new StringBuilder();
@@ -79,4 +78,15 @@ public class SimpleJsonManger {
         saveNote(sample);
         return sample;
     }
+    public boolean toggleImportant(String noteId) {
+        List<Note> notes = loadNotes();
+        for (Note n : notes) {
+            if (n.getId().equals(noteId)) {
+                n.toggleImportant();
+                return saveNote(notes);
+            }
+        }
+        return false;
+    }
+
 }

@@ -16,9 +16,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.noteapp.models.Note;
-import com.example.noteapp.models.SimpleJsonManger;
+import com.example.noteapp.models.SimpleJsonManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     .setMessage("Voulew-vous vraiment tout effacer ?")
                     .setPositiveButton("oui", (dialog, which) -> {
                         notes.clear();
-                        jsonManger.saveNotes(notes);
+                        jsonManger.saveNote(notes);
                         refreshList();
                     })
                     .setNegativeButton("Non", null)
